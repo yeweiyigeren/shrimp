@@ -1,0 +1,217 @@
+.main {
+    padding-top: 30px;
+    padding-right: 0;
+}
+
+.main .recommend-collection {
+    margin-bottom: 20px;
+}
+
+div {
+    display: block;
+}
+
+.main .recommend-collection .collection {
+    display: inline-block;
+    margin: 0 18px 18px 0;
+    min-height: 32px;
+    background-color: #f7f7f7;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.main .recommend-collection .collection img {
+    width: 32px;
+    height: 32px;
+}
+
+img {
+    vertical-align: middle;
+    border: 0;
+}
+
+a {
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+}
+
+.main .recommend-collection .collection .name {
+    display: inline-block;
+    padding: 0 11px 0 6px;
+    font-size: 14px;
+}
+
+.main .split-line {
+    margin: -5px 0 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.note-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.note-list li {
+    position: relative;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 15px 2px 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+    word-wrap: break-word;
+}
+
+li {
+    line-height: 20px;
+}
+
+.main .title{
+    font-family: -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+
+.note-list .abstract {
+    margin: 0 0 8px;
+    font-size: 13px;
+    line-height: 24px;
+    color: #999;
+}
+
+.note-list .meta {
+    padding-right: 0!important;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.note-list .meta a, .note-list .meta a:hover {
+    transition: .1s ease-in;
+    -webkit-transition: .1s ease-in;
+    -moz-transition: .1s ease-in;
+    -o-transition: .1s ease-in;
+    -ms-transition: .1s ease-in;
+}
+
+.iconfont {
+    font-family: iconfont!important;
+    font-size: inherit;
+    font-style: normal;
+    font-weight: 400!important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ic-list-comments:before {
+    content: "阅读数:";
+}
+
+.note-list .meta span {
+    margin-right: 10px;
+    color: #b4b4b4;
+}
+
+.ic-list-like:before {
+    content: "点赞数:";
+}
+
+.note-list li.have-img {
+    min-height: 112px;
+}
+
+.note-list .have-img .wrap-img {
+    margin-top: -58px;
+    bottom: 40px;
+    width: 125px;
+    height: 100px;
+}
+
+.note-list .have-img .wrap-img {
+    position: absolute;
+    top: 50%;
+    margin-top: -60px;
+    right: 0;
+    width: 125px;
+    height: 100px;
+}
+
+.note-list .have-img .wrap-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.note-list .have-img>div {
+    padding-right: 135px;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.container {
+    width: 750px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.note-list .title {
+    margin: -7px 0 4px;
+    display: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.note-list .title:visited {
+    color: #969696;
+}
+
+.carousel-inner img{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px;
+    height: auto;
+    max-width: 100%;
+}
+
+.carousel-control.right{
+    background-image:none!important;
+}
+
+.carousel-control.left{
+    background-image:none!important;
+}
+
+.item{
+    height:450px;
+}
+
+#myCarousel{
+    margin-bottom:50px;
+}
+
+.no-blog h3{
+    text-align: center;
+    margin-bottom:80px;
+    margin-top:80px;
+}
+
+a:hover{
+    text-decoration : none;
+}
+
+

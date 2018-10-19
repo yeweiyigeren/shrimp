@@ -1,0 +1,115 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+    {% block custom_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">Shrimp_in_the_sea</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div id="navbar-collapse" class="collapse navbar-collapse">
+                  <ul class="nav navbar-nav">
+                        {% block headers %}
+                            <li class="active">
+                                <a href="{% url 'index' %}">首页</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog_with_type' 2 %}">技术博客</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'question' %}">私人领地</a>
+                            </li>
+                        {% endblock %}
+
+                  </ul>
+                  <form action="/search/" method="POST" class="navbar-form navbar-left">
+                      {% csrf_token %}
+                        <div class="form-group">
+                            <input id="search_keywords" name="search_keywords" type="text" class="form-control" placeholder="">
+                        </div>
+                        <button id="search" type="submit" class="btn btn-default">搜索</button>
+                  </form>
+                  <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                      {% if user.nick_name %}{{ user.nick_name }}{% else %}{{ user.username }}{% endif %} <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                        <li class="disabled"><a href="javascript:;" onclick="nofinish()">我的主页</a></li>
+                                        <li class="disabled"><a href="javascript:;" onclick="nofinish()">喜欢的文章</a></li>
+                                        <li class="disabled"><a href="javascript:;" onclick="nofinish()">我的评论</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{% url 'logout' %}">退出登陆</a></li>
+                                  </ul>
+                            </li>
+                            <a class="btn write-btn" target="_blank" href="">写文章</a>
+                        {% else %}
+                            <li><a href="{% url 'login' %}?from={{ request.get_full_path }}">登陆</a></li>
+                            <li><a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a></li>
+                            <a class="btn write-btn" target="_blank" href="">写文章</a>
+                        {% endif %}
+                  </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--<audio autoplay src="{% static 'yunyan.mp3' %}"></audio>-->
+    {% block content %}
+    {% endblock %}
+
+    {% block custom_js %}{% endblock %}
+
+
+    {% block footer %}
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer-more-list text-center mb-3 d-none d-sm-block">
+                        <ul class="">
+                            <li><a href="{% url 'register' %}">注册</a></li>
+                            <li><a href="#">找回密码</a></li>
+                            <li><a href="{% url 'logout' %}">注销</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-center text-muted">
+                        <div class="copyright">
+                            <small>© 2018 Shrimp_in_the_sea. All Rights Reserved.</small>
+                            <small class="license mt-2">Only for entertainment.</small>
+                        </div>
+                    <div class="miitbeian mt-2">
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+    <script>
+        function nofinish(){
+            alert('暂未开放，敬请期待！');
+        }
+    </script>
+</body>
+</html>

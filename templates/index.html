@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    Shrimp_in_the_sea|首页
+{% endblock %}
+
+{% block content %}
+    <div class="row" id="index-canvas">
+        <canvas id="text" width="500" height="100" style="display: none;"></canvas>
+        <canvas id="stage" width="%100" height="100" ></canvas>
+        <form id="form" style="position: absolute;margin: 0;padding: 0;width: 600px;height: 100px;">
+            <input type="text" id="inputText" value="欢迎" style="border: 1px solid #ddd;padding: 6px;font-size: 18px;width: 200px;text-transform: uppercase;top: 75px;left: 130px;position: absolute;"/>
+            <input type="submit" id="inputSubmit" value="TRY IT" style="display: block;width: 100px;border: 0;line-height: 35px;height: 35px;color: #fff;background: mediumpurple;font-size: 18px;top: 75px;left: 350px;cursor: pointer;position: absolute;margin: 0;padding: 0;"/>
+        </form>
+
+        <script src="{% static 'canvas/EasePack.min.js' %}"></script>
+        <script src="{% static 'canvas/TweenLite.min.js' %}"></script>
+        <script src="{% static 'canvas/easeljs-0.7.1.min.js' %}"></script>
+        <script src="{% static 'canvas/requestAnimationFrame.js' %}"></script>
+        <script src="{% static 'canvas/index.js' %}"></script>
+    </div>
+{% endblock %}

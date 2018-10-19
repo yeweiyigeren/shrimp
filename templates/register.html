@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Shrimp_in_the_sea|注册{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+{% endblock %}
+
+{% block headers %}
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'index' %}">Shrimp_in_the_sea</a>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form row">
+            <div class="form-horizontal col-md-offset-3" id="login_form">
+                    <h3 class="form-title">注册</h3>
+                    <div class="col-md-9">
+                        <form action="" method="post" autocomplete="off">
+                            {% csrf_token %}
+                            {% for field in register_form %}
+                            <div class="form-group">
+                                <i class="fa fa-user fa-lg"></i>
+                                <h5 class="form-title" for="{{ field.id_for_label }}">{{ field.label }}</h5>
+                                {{ field }}
+                                <p class="text-danger">{{ field.errors.as_text }}</p>
+                            </div>
+                            {% endfor %}
+                            <span class="text-danger">{{ register_form.non_field_errors }}</span>
+
+                            <div class="form-group col-md-offset-9">
+                                <button id="send_code"  class="btn btn-primary pull-left">发送验证码</button>
+                                <button type="submit" class="btn btn-success pull-right" name="submit">注册</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

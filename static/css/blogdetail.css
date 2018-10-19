@@ -1,0 +1,367 @@
+img{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px;
+    height: auto;
+    max-width: 100%;
+}
+
+.blog-content{
+    color: #2f2f2f;
+    word-break: break-word!important;
+    word-break: break-all;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.like .like-group{
+    position: relative;
+    padding: 13px 0 15px 0;
+    font-size: 0;
+    border: 1px solid #EA6F5A;
+    border-radius: 40px;
+}
+
+.like{
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.like .like-group .btn-like{
+    display: inline-block;
+    font-size: 19px;
+}
+
+.like .like-group .btn-like a{
+    text-decoration : none;
+    position: relative;
+    padding: 18px 30px 18px 55px;
+    color: #EA6F5A;
+}
+
+.like .like-group .btn-like:before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 2px;
+    width: 50px;
+    height: 50px;
+    background-image: url(like.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 1000px 50px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.like .like-group .modal-wrap{
+    font-size: 18px;
+    border-left: 1px solid rgba(236, 97, 73, 0.4);
+    display: inline-block;
+    margin-left: -15px;
+}
+
+.like .like-group .modal-wrap a{
+    text-decoration : none;
+    color: #EA6F5A;
+    padding: 18px 26px 18px 18px;
+}
+
+.sign-container{
+    padding: 10px 15px;
+    width: 100%;
+    height: 80px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    background-color: hsla(0,0%,71%,.1);
+    resize: none;
+    display: inline-block;
+    vertical-align: top;
+    outline-style: none;
+    text-align: center;
+}
+
+
+.btn-sign{
+    width: 78px;
+    margin: 11px 10px 0 0;
+    padding: 7px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    color: #fff !important;
+    background-color: #3194d0;
+    outline: none;
+}
+
+.new-comment span {
+    font-size: 14px;
+    vertical-align: -7px;
+}
+
+#comment-list {
+    margin-top: 30px;
+    margin-bottom: -15px;
+}
+
+.comment {
+    padding: 20px 0 30px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.author {
+    margin-bottom: 15px;
+}
+
+.info {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.meta {
+    font-size: 12px;
+    color: #969696;
+}
+
+.comment-list .comment p {
+    font-size: 16px;
+}
+
+.comment-list .tool-group a {
+    margin-right: 10px;
+    font-size: 0;
+    color: #969696;
+    display: inline-block;
+}
+
+.comment-list .tool-group a:hover {
+    color: #3194d0;
+}
+
+.like-button{
+    position: relative;
+    padding-left: 23px;
+}
+
+.comment-list .comment-wrap .report {
+    float: right;
+    margin: 12px 0 0 10px;
+    display: none;
+}
+
+.comment-list .sub-comment-list {
+    margin-top: 20px;
+    padding: 5px 0 5px 20px;
+    border-left: 2px solid #d9d9d9;
+}
+
+
+.comment-list .sub-comment {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.comment-list .sub-comment-list p {
+    margin: 0 0 5px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.comment-list .sub-comment-list a:hover {
+    color: #3194d0;
+}
+
+.comment-list .sub-tool-group {
+    font-size: 12px;
+    color: #969696;
+}
+
+.comment-list .sub-tool-group a {
+    margin-left: 10px;
+    color: #969696;
+}
+
+.comment-list .sub-tool-group a i {
+    margin-right: 5px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.like-button:before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    width: 50px;
+    height: 50px;
+    background-image: url(comment_like.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 1050px 50px;
+}
+
+.comment-list .tool-group a span {
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+a:focus, a:hover {
+    color: #2f2f2f;
+    text-decoration: none;
+}
+
+.no-comment {
+    width: 226px;
+    height: 92px;
+    margin: 30px auto 20px;
+    background: url(no_comment.png) no-repeat;
+    background-size: contain;
+}
+
+.normal-comment-list .text {
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 12px;
+    color: #969696;
+}
+
+.normal-comment-list{
+    margin-top:50px;
+    margin-bottom:80px;
+}
+
+.normal-comment-list .top-title {
+    padding-bottom: 20px;
+    font-size: 17px;
+    font-weight: 700;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.normal-comment-list .top-title span {
+    vertical-align: middle;
+}
+
+.comment-list .new-comment {
+    position: relative;
+    margin-left: 48px;
+}
+
+.new-comment textarea {
+    padding: 10px 15px;
+    width: 100%;
+    height: 80px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    background-color: hsla(0,0%,71%,.1);
+    resize: none;
+    display: inline-block;
+    vertical-align: top;
+    outline-style: none;
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    line-height: inherit;
+    overflow: auto;
+}
+
+textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+.new-comment .write-function-block {
+    height: 50px;
+}
+
+.new-comment .btn-send {
+    float: right;
+    width: 78px;
+    margin: 10px 0;
+    padding: 8px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    color: #fff!important;
+    background-color: #42c02e;
+    cursor: pointer;
+    outline: none;
+    display: block;
+}
+
+.new-comment .cancel {
+    float: right;
+    margin: 18px 30px 0 0;
+    font-size: 16px;
+    color: #969696;
+}
+
+.like .like-group.like-animation{
+    background-color: #EA6F5A;
+}
+
+.like .like-group.like-animation a{
+    color: white;
+}
+
+.like .like-group.like-animation .btn-like:before {
+    -webkit-animation: likeBlast-data-v-6ddd02c6 0.6s 1 steps(19);
+    animation: likeBlast-data-v-6ddd02c6 0.6s 1 steps(19);
+    background-position: right;
+}
+
+.like .like-group.like-animation .modal-wrap, .like .like-group.active .modal-wrap{
+    border-left: 1px solid white;
+}
+
+#comment-list{
+    margin-bottom:150px;
+}
+
+.author {
+    margin: 30px 0 40px;
+}
+
+.author .avatar {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.avatar {
+    width: 24px;
+    height: 24px;
+    display: block;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+}
+
+.author .info{
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.author .name {
+    margin-right: 3px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.author .meta {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #969696;
+}

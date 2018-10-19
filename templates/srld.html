@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ blog.title }}-Shrimp_in_the_sea
+{% endblock %}
+
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/blogdetail.css' %}">
+{% endblock %}
+
+{% block headers %}
+    <li>
+        <a href="{% url 'index' %}">首页</a>
+    </li>
+    <li>
+        <a href="{% url 'blog_with_type' 2 %}">技术博客</a>
+    </li>
+    <li>
+        <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
+    </li>
+    <li class="active">
+        <a href="{% url 'blog_with_type' 1 %}">私人领地</a>
+    </li>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <h3>{{ blog.title }}</h3>
+                <div class="author">
+                    <a class="avatar" href="#">
+                        <img src="{{ MEDIA_URL }}{{ blog.author.image }}" alt="96">
+                    </a>
+                    <div class="info">
+                        <span class="name">作者：{{ blog.author }}</span>
+                        <div class="meta">
+                            <span class="publish-time">{{ blog.create_time|date:"Y-m-d H:i:s" }}</span>
+                            <span class="wordage">分类 {{ blog.blog_type }}</span>
+                            <span class="views-count">阅读 {{ blog.read_num }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-content">{{ blog.content|safe }}</div>
+
+                <div  class="like">
+                    <div  class="btn like-group {% if is_like %}like-animation{% endif %}">
+                        <div class="btn-like">
+                            <a href="javascript:;" onclick="addlike()">喜欢</a>
+                        </div>
+                        <div class="modal-wrap">
+                            <a href="javascript:;" onclick="addlike()">{{ like_num }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="normal-comment-list">
+                    <div class="top-title">
+                        <span>评论</span>
+                    </div>
+                    {% if user.is_authenticated %}
+                        {{ comment_form }}
+                        <form class="new-comment">
+                            <textarea placeholder="写下你的评论..." id="add-comment"></textarea>
+                            <div class="write-function-block">
+                                <input type="hidden" name="object_id" value="{{ blog.pk }}">
+                                <input type="button" id="add-comment-submit" class="btn btn-send" data-cid="452" value="发表">
+                                <a class="cancel">取消</a>
+                                <p class="global-errortip js-global-error"></p>
+                            </div>
+                        </form>
+                    {% else %}
+                        <form class="new-comment">
+                            <div class="sign-container">
+                                <a href="{% url 'login' %}" class="btn btn-sign">
+                                    登录
+                                </a>
+                                <span>后发表评论</span>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+
+                {% if comments %}
+                    <div id="comment-list" class="comment-list normal-comment-list">
+                        <div class="top-title">
+                            <span>评论列表  ({{ comment_num }})</span>
+                        </div>
+                        {% for comment in comments %}
+                            <div id="comment-{{ comment.pk }}" class="comment">
+                                <div>
+                                    <div class="author">
+                                        <div data-v-f3bf5228="" class="v-tooltip-container" style="z-index: 0;">
+                                            <div class="v-tooltip-content">
+                                                <a href="{{ comment.user.image }}" target="_blank" class="avatar">
+                                                    <img src="{{ comment.user.image }}">
+                                                </a>
+                                            </div> <!---->
+                                        </div>
+                                        <div class="info"><a href="#" target="_blank" class="name">{{ comment.user.username }}</a> <!----> <!---->
+                                            <div class="meta">
+                                            <span>{{ comment.comment_time|date:"Y-m-d H:i:s" }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-wrap">
+                                        <p>{{ comment.content }}</p>
+                                        <!--<div class="tool-group">-->
+                                            <!--<a data-v-cdecbe24="" id="like-button-28234532" class="like-button">-->
+                                                <!--<span>66人赞</span>-->
+                                            <!--</a>-->
+                                            <!--<a class="">-->
+                                                <!--<span>回复</span>-->
+                                            <!--</a>-->
+                                            <!--<a class="report">-->
+                                                <!--<span>举报</span>-->
+                                            <!--</a> &lt;!&ndash;&ndash;&gt;-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="normal-comment-list">
+                        <div class="top-title">
+                            <span>评论列表</span>
+                        </div>
+                        <div class="no-comment"></div>
+                        <div class="text">
+                            暂无评论！
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript">
+        function addlike(){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url 'addlike' %}",
+                data:{'blog_id':{{ blog.id }},},
+                async: true,
+                beforeSend:function(xhr, settings){
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function(data) {
+                    if(data.status == 'fail'){
+                        if(data.msg == '用户未登录'){
+                            window.location.href="/login/";
+                        }else{
+                            alert(data.msg);
+                        }
+                        }else if(data.status == 'success'){
+                            window.location.reload();//刷新当前页面.
+                        }
+                    }
+                });
+            };
+
+        //添加评论
+        $('#add-comment-submit').on('click', function(){
+            var comments = $("#add-comment").val()
+            if(comments == ""){
+                alert("评论不能为空");
+                return
+            }
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url 'addcomment' %}",
+                data:{'blog_id':{{ blog.id }}, 'comments':comments},
+                async: true,
+                beforeSend:function(xhr, settings){
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function(data) {
+                    if(data.status == 'fail'){
+                        if(data.msg == '用户未登录'){
+                            window.location.href="/login/";
+                        }else{
+                            alert(data.msg);
+                        }
+
+                    }else if(data.status == 'success'){
+                        window.location.reload();//刷新当前页面.
+                    }
+                },
+            });
+        });
+    </script>
+{% endblock %}

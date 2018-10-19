@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    搜索-Shrimp_in_the_sea
+{% endblock %}
+
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/bloglist.css' %}">
+{% endblock %}
+
+{% block headers %}
+    <li>
+        <a href="{% url 'index' %}">首页</a>
+    </li>
+    <li>
+        <a href="{% url 'blog_with_type' 2 %}">技术博客</a>
+    </li>
+    <li>
+        <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
+    </li>
+    <li class="active">
+        <a href="#">搜索结果</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+             <div class="col-xs-16 main">
+                <div class="recommend-collection">
+                    {% for sub_blog in sub_blogs %}
+                        <a class="collection" target="_blank" href="{% url 'blog_with_type' sub_blog.pk %}">
+                          <img src="//upload.jianshu.io/collections/images/14/6249340_194140034135_2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64" alt="64">
+                          <div class="name">{{ sub_blog.type_name }}</div>
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="split-line"></div>
+                <div id="list-container">
+                    <!-- 文章列表模块 -->
+                    <ul class="note-list" infinite-scroll-url="/">
+                        {% if blogs %}
+                            {% for blog in blogs %}
+                                <li id="note-{{ blog.pk }}" data-note-id="32437251" class="have-img">
+                                    {% if blog.thumb_img %}
+                                        <a class="wrap-img" href="{% url 'blog_detail' blog.pk %}" target="_blank">
+                                          <img class="  img-blur-done" src="{{ MEDIA_URL }}{{ blog.thumb_img }}" alt="120">
+                                        </a>
+                                    {% endif %}
+                                  <div class="content">
+                                    <a class="title" target="_blank" href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                                    <p class="abstract">
+                                        {%if blog.content|length >= 100 %}
+                                            {{ blog.content|slice:"100"}}...
+                                        {%else%}
+                                            {{ blog.content }}
+                                        {%endif%}
+                                    </p>
+                                    <div class="meta">
+                                        <a class="nickname" target="_blank" href="#">{{ blog.author }}</a>
+                                        <span style="margin-left:5px;">   阅读数: {{ blog.read_num }}</span>
+                                        <span>             {{ blog.blog_type.type_name }}   </span>
+                                        <span>             {{ blog.create_time|date:"Y-m-d" }}</span>
+                                    </div>
+                                  </div>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-blog">
+                                <h3>暂无博客，敬请期待</h3>
+                            </div>
+                        {% endif %}
+                    </ul>
+                    <!-- 文章列表模块 -->
+                </div>
+                 <div class="paginator">
+                    <ul class="pagination">
+                        {# 上一页 #}
+                        <li>
+                            {% if page_of_blogs.has_previous %}
+                                <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            {% else %}
+                                <span aria-hidden="true">&laquo;</span>
+                            {% endif %}
+                        </li>
+                        {# 全部页码 #}
+                        {% for page_num in page_range %}
+                            {% if page_num == page_of_blogs.number %}
+                                <li class="active"><span>{{ page_num }}</span></li>
+                            {% else %}
+                                {% if page_num == '...' %}
+                                    <li><span>{{ page_num }}</span></li>
+                                {% else %}
+                                    <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {# 下一页 #}
+                        <li>
+                            {% if page_of_blogs.has_next %}
+                                <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            {% else %}
+                                <span aria-hidden="true">&raquo;</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+                    <p>
+                        共有{{ page_of_blogs.paginator.count }}篇文章，
+                        当前第{{ page_of_blogs.number }}页，共{{ page_of_blogs.paginator.num_pages }}页
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
