@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from users.models import UserProfile
 
@@ -21,9 +22,9 @@ class BlogType(models.Model):
 class Blog(models.Model):
 	title = models.CharField(max_length=100,verbose_name=u'标题')
 	blog_type = models.ForeignKey(BlogType, verbose_name=u'类型', on_delete=models.CASCADE)
-	content = models.TextField(verbose_name=u'内容')
+	content = RichTextUploadingField(verbose_name=u'内容')
 	author = models.ForeignKey(UserProfile, verbose_name=u'作者',on_delete=models.CASCADE)
-	thumb_img = models.ImageField(upload_to='thumb/%m',default='thumb/default.png',verbose_name=u'缩略图')
+	thumb_img = models.ImageField(upload_to='thumb/%m',default='',verbose_name=u'缩略图',null=True,blank=True)
 	create_time = models.DateTimeField(auto_now_add=datetime.now(),verbose_name=u'创建时间')
 	update_time = models.DateTimeField(auto_now=True, verbose_name=u'最后更新时间')
 	read_num = models.IntegerField(verbose_name=u'阅读数',default=0)

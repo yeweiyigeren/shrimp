@@ -20,6 +20,19 @@
         <li>
             <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
         </li>
+        <li>
+            <a href="{% url 'question' %}">私人领地</a>
+        </li>
+    {% elif blog.blog_type.pk == 10 %}
+        <li>
+            <a href="{% url 'blog_with_type' 2 %}">技术博客</a>
+        </li>
+        <li>
+            <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
+        </li>
+        <li class="active">
+            <a href="{% url 'question' %}">私人领地</a>
+        </li>
     {% else %}
         <li>
             <a href="{% url 'blog_with_type' 2 %}">技术博客</a>
@@ -27,10 +40,10 @@
         <li class="active">
             <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
         </li>
+        <li>
+            <a href="{% url 'question' %}">私人领地</a>
+        </li>
     {% endif  %}
-    <li>
-        <a href="{% url 'question' %}">私人领地</a>
-    </li>
 {% endblock %}
 
 {% block content %}
@@ -69,7 +82,6 @@
                         <span>评论</span>
                     </div>
                     {% if user.is_authenticated %}
-                        {{ comment_form }}
                         <form class="new-comment">
                             <textarea placeholder="写下你的评论..." id="add-comment"></textarea>
                             <div class="write-function-block">
@@ -103,7 +115,7 @@
                                         <div data-v-f3bf5228="" class="v-tooltip-container" style="z-index: 0;">
                                             <div class="v-tooltip-content">
                                                 <a href="{{ comment.user.image }}" target="_blank" class="avatar">
-                                                    <img src="{{ comment.user.image }}">
+                                                    <img src="{{ MEDIA_URL }}{{ comment.user.image }}">
                                                 </a>
                                             </div> <!---->
                                         </div>

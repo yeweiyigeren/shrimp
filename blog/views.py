@@ -95,18 +95,30 @@ class MyWorldView(View):
 
 class QuestionView(View):
 	def get(self,request):
+		if  request.session.has_key('question'):
+			blog_type = get_object_or_404(BlogType, pk=10)
+			all_blogs = Blog.objects.filter(blog_type=blog_type)
+			context = get_blog_list_common_data(request, all_blogs)
+
+			context['blog_type'] = blog_type
+			request.session['question'] = True
+			return render(request, 'srldlist.html', context)
+
 		question_form = QuestionForms()
 		questions = [
-			'请问世上最漂亮的人是?',
-			'请问217代表什么?',
-			'有一项运动我心仪已久，是什么?',
+			'世上最漂亮的人?',
+			'207是什么?',
+			'干啥呢?',
+			'干啥去?',
+			'一项运动',
 		]
 
 		import random
 
-		value = questions[random.randint(0,2)]
+		value = questions[random.randint(0,len(questions)-1)]
 		context = {}
 		context['question'] = value
+		context['msg'] = ''
 		context['question_form'] = question_form
 		return render(request, 'question.html', context)
 
@@ -117,9 +129,11 @@ class QuestionView(View):
 			question = request.POST.get("question", "")
 
 			questions = {
-				'请问世上最漂亮的人是?':'女儿',
-				'请问217代表什么?':'宿舍',
-				'有一项运动我心仪已久，是什么?':'跳伞',
+				'世上最漂亮的人?':'女儿',
+				'207是什么?':'宿舍',
+				'干啥呢?':'敲代码',
+	            '干啥去?':'改代码',
+	            '一项运动':'跳伞',
 			}
 			my_answer = questions[question]
 			if my_answer == anwser:

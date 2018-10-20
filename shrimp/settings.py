@@ -26,9 +26,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = 'gk)7x3g7#v!^8qpk^tjwim6!txs_v7t*56b1fcb03)-qvpck2-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'xadmin',
+    'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'users',
     'blog',
     'operation',
-    'pure_pagination',
 ]
 
 AUTH_USER_MODEL = "users.UserProfile"
@@ -88,12 +89,16 @@ WSGI_APPLICATION = 'shrimp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "myblog",
-        'USER': 'root',
-        'PASSWORD': "root",
-        'HOST': "127.0.0.1"
-    }
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': "myblog",
+    #     'USER': 'root',
+    #     'PASSWORD': "root",
+    #     'HOST': "127.0.0.1"
+    # }
 }
 
 
@@ -135,18 +140,61 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR , 'static'),
-)
-
+STATIC_ROOT = os.path.join(BASE_DIR , 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR , 'media/')
 
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 
+#配置ckeditor
+CKEDITOR_UPLOAD_PATH = 'upload/'
+
+
 # 自定义参数
 EACH_PAGE_BLOGS_NUMBER = 10
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'yeweiyigeren@163.com'
+EMAIL_HOST_PASSWORD = 'YWhenxili520'  # 授权码
+EMAIL_SUBJECT_PREFIX = '[Shrimp_in_the_sea] '
+EMAIL_USE_SSL = True  # 与SMTP服务器通信时，是否启动ssl链接(安全链接)
+
+
+ADMINS = (
+    ('admin', '289333404@qq.com'),
+)
+
+# 日志文件
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            # 'filename': 'shrimp_debug.log',
+            'filename': '/home/shrimp_debug/shrimp_debug.log',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 

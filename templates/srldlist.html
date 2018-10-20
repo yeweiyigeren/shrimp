@@ -20,7 +20,7 @@
         <a href="{% url 'blog_with_type' 1 %}">旅游攻略</a>
     </li>
     <li class="active">
-        <a href="{% url 'blog_with_type' 1 %}">私人领地</a>
+        <a href="#">私人领地</a>
     </li>
 {% endblock %}
 
@@ -28,14 +28,6 @@
     <div class="container">
         <div class="row">
              <div class="col-xs-16 main">
-                <div class="recommend-collection">
-                    {% for sub_blog in sub_blogs %}
-                        <a class="collection" target="_blank" href="{% url 'blog_with_type' sub_blog.pk %}">
-                          <img src="//upload.jianshu.io/collections/images/14/6249340_194140034135_2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64" alt="64">
-                          <div class="name">{{ sub_blog.type_name }}</div>
-                        </a>
-                    {% endfor %}
-                </div>
                 <div class="split-line"></div>
                 <div id="list-container">
                     <!-- 文章列表模块 -->

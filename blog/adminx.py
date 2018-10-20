@@ -18,6 +18,7 @@ class BlogAdmin(object):
     list_display = ['title', 'blog_type', 'author','read_num', 'thumb_img', 'create_time', 'update_time']
     search_fields = ['title', 'blog_type', 'author', 'thumb_img']
     list_filter = ['title', 'blog_type', 'author', 'thumb_img', 'create_time', 'update_time']
+    # fields =  ('title', 'blog_type', 'author', 'content')
 
 
 #

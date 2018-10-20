@@ -91,7 +91,7 @@
                                     <a class="title" target="_blank" href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
                                     <p class="abstract">
                                         {%if blog.content|length >= 100 %}
-                                            {{ blog.content|slice:"100"}}...
+                                            {{ blog.content|striptags|slice:"80"}}...
                                         {%else%}
                                             {{ blog.content }}
                                         {%endif%}
